@@ -1,0 +1,152 @@
+Primeros comandos de git
+
+Si te equivocaste en el nombre o email que configuraste al principio, lo puedes modificar con:
+git config --global --replace-all user.name “Aquí va tu nombre modificado”
+O si lo deseas eliminar y añadir uno nuevo
+git config --global --unset-all user.name :Elimina el nombre del usuario
+git config --global --add user.name “Aquí va tu nombre”
+config --list --show-origin: Muestra donde se encuentran las configuraciones guardadas
+
+
+git status: indica el estado de los archivos en el git
+git add: permite trackear los archivos (envía el documento con los cambios realizados al stagin area para realizar el commit)
+git rm --cached nombre_del_archivo.txt: para eliminar el archivo del staged(ram)
+git rm nombre_del_archivo.txt: para eliminar del repositorio
+git commit -m "...": Realiza el commit del documento
+git log: desplega el historial de commits realizados
+git log --stat muestra cambios más específicos
+
+--- En caso de cambiar la consola por mensajes de error, salir con shift escapee zz (para windows), control + o enter control + x(para linux)
+
+git reset --soft [SHA 1]: elimina los cambios hasta el staging area
+git reset --mixed [SHA 1]: elimina los cambios hasta el working area
+git reset --hard [SHA 1]: regresa hasta el commit del [SHA-1]
+Donde el SHA-1 es el identificador del commit
+
+git reset HEAD
+
+
+----------------------------------------------------------------------------------------------------------
+
+git clone url_del_servidor_remoto: Nos permite descargar los archivos de la última versión de la rama principal y todo el historial de cambios en la carpeta .git.
+git push: Luego de hacer git add y git commit debemos ejecutar este comando para mandar los cambios al servidor remoto.
+git fetch: Lo usamos para traer actualizaciones del servidor remoto y guardarlas en nuestro repositorio local (en caso de que hayan, por supuesto).
+git merge: También usamos el comando git merge con servidores remotos. Lo necesitamos para combinar los últimos cambios del servidor remoto y nuestro directorio de trabajo.
+git pull: Básicamente, git fetch y git merge al mismo tiempo.
+Adicionalmente, tenemos otros comandos que nos sirven para trabajar en proyectos muy grandes:
+
+git log --oneline:Te muestra el id commit y el título del commit.
+git log --decorate: Te muestra donde se encuentra el head point en el log.
+git log --stat: Explica el número de líneas que se cambiaron brevemente.
+git log -p: Explica el número de líneas que se cambiaron y te muestra que se cambió en el contenido.
+git shortlog: Indica que commits ha realizado un usuario, mostrando el usuario y el título de sus commits.
+git log --graph --oneline --decorate y
+git log --pretty=format:"%cn hizo un commit %h el dia %cd": Muestra mensajes personalizados de los commits.
+git log -3: Limitamos el número de commits.
+git log --after=“2018-1-2”
+git log --after=“today” y
+git log --after=“2018-1-2” --before=“today”: Commits para localizar por fechas.
+git log --author=“Name Author”: Commits hechos por autor que cumplan exactamente con el nombre.
+git log --grep=“INVIE”: Busca los commits que cumplan tal cual está escrito entre las comillas.
+git log --grep=“INVIE” –i: Busca los commits que cumplan sin importar mayúsculas o minúsculas.
+git log – index.html: Busca los commits en un archivo en específico.
+git log -S “Por contenido”: Buscar los commits con el contenido dentro del archivo.
+git log > log.txt: guardar los logs en un archivo txt
+
+----------------------------------------------------------------------------------------------------------
+git branch -nombre de la rama-: Con este comando se genera una nueva rama.
+
+git checkout -nombre de la rama-: Con este comando puedes saltar de una rama a otra.
+
+git checkout -b rama: Genera una rama y nos mueve a ella automáticamente, Es decir, es la combinación de git brach y git checkout al mismo tiempo.
+
+git reset id-commit: Nos lleva a cualquier commit no importa la rama, ya que identificamos el id del tag., eliminando el historial de los commit posteriores al tag seleccionado.
+
+git checkout rama-o-id-commit: Nos lleva a cualquier commit sin borrar los commit posteriores al tag seleccionado.
+
+---------------------------------------------------------------------------------------------------------
+
+git mergetool: arranca una herramienta visual en consola permitiendo así resolver conflictos.
+git merge abort: aborta el merge en proceso.
+git push: para enviar cambios al repositorio remoto se utiliza.
+git fetch: Para actualizar el repositorio local se hace uso del comando .
+git config --global init.defaultBranch main.
+git branch -M main.
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+personal access token classic:
+	 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 
+fine-grained personal access token:
+	
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+github ya no maneja la rama 'master' como rama principal por defecto, ahora esta rama se llama 'main' por lo cual es necesario configurar la rama por defecto en git como 'main'.
+	-cambiar el nombre de una rama master: git branch -m <nombre_de_rama> 
+	-cambiar el nombre de la rama master por defecto: 	git config --global init.defaultBranch <nombre_de_rama>
+
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+-git merge <nombre_rama>: fusiona la rama nombre_rama con la rama en la cual se está situado en el momento.
+-git merge <nombre_rama> --allow-unrelated-histories: obliga a fusionar las ramas con el merge 
+-git remote add origin <URL>: conecta el reposotirio de la URL con el repositorio local, al tiempo que da origen del repositorio remoto.
+-git remote -v: lista las conexiones existentes. Donde realizar fetch y push.
+-git remote remove origin: Elimina la conexión con un repositorio remoto.
+-git push origin <nombre_rama>: envía la rama del repositorio local, al repositorio remoto.
+-git push origin nombre_rama> --tags: envías los tags de la rama al repositorio remoto
+-git pull origin <nombre_rama>: Descarga los cambios del repositorio remoto y los fusiona automaticamente con la rama espejo del repositorio local
+-git pull origin <nombre_rama> --allow-unrelated-histories: realiza la fusión clásica del pull a fuerza.
+
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+llaves públicas y privadas:
+Generación de una llave a traves del algoritmo rsa
+	ssh-keygen -t rsa -b 4096 -C "correo con el que se desesa asociar la llave"
+	ssh-keygen: indica la generación de una llave de ssh
+	-t: especifíca el algoritmo a utilizar 
+	rsa: algortimo empleado
+	-b: indica la complejidad de la llave de manera matemática
+	-C (c en mayuscula): indica el correo al que está asociada la llave
+	passphrase utilizado: zionparty
+	
+eval $(ssh-agent -s): con este comando se activa el servidor de llaves el cual verifica que las llaves se estén enviando y recibiendo de manera autompatica
+
+para agregar la llave al servidor se realiza con el siguiente comando:
+	ssh-add <ruta donde está la llave>
+	se debe agregar la llave privada.
+	-----------------------------------------------------------------
+	En Mac
+Encender el “servidor” de llaves SSH de tu computadora:
+eval "$(ssh-agent -s)"
+Si usas una versión de OSX superior a Mac Sierra (v10.12), debes crear o modificar un archivo “config” en la carpeta de tu usuario con el siguiente contenido (ten cuidado con las mayúsculas):
+Host *
+
+AddKeysToAgent yes
+UseKeychain yes
+IdentityFile ruta-donde-guardaste-tu-llave-privada
+Añadir tu llave SSH al “servidor” de llaves SSH de tu computadora (en caso de error puedes ejecutar este mismo comando pero sin el argumento -K):
+ssh-add -K ruta-donde-guardaste-tu-llave-privada
+
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+Para configurar la SSH de github se debe realizar con el siguiente comando:
+	git remote set-url <nombre del repo> <url ssh de github>
+	
+	se verifica el cambio con el comando git remote -v
+	
+Comandos para copiar la llave SSH:
+-Mac:
+
+pbcopy < ~/.ssh/id_rsa.pub
+Windows (Git Bash):
+clip < ~/.ssh/id_rsa.pub
+Linux (Ubuntu):
+cat ~/.ssh/id_rsa.pub
+
+IMPORTANTE: si al momento de realizar el pull arroja que hay problemas para fusionar con la referencia master, debe ingresar a la carpeta .git y modificar en el archivo config, en la sección [branch " "], el valor final del merge por el nombre de la rama principal del proyecto
+	[branch "main"]
+	remote = origin
+	merge = refs/heads/main
+
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
