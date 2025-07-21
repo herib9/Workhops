@@ -8,6 +8,7 @@
 # Ejecutar clean y luego create
 # Declarar PHONY
 
+
 # Crear una variable
 SALUDO = "hello world"
 
