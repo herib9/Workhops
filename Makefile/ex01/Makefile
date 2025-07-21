@@ -7,6 +7,7 @@
 # Ejecuta el programa
 # Declara las reglas que no generan archivos
 
+
 # Define el nombre del ejecutable
 NAME = program
 
